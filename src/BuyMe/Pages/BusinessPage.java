@@ -13,7 +13,7 @@ public class BusinessPage extends BasePage {
     public static void pickBusiness(){
         assertUrl();
         selectBusiness();
-        enterPrice();
+        choosePrice();
     }
 
     public static void assertUrl(){
@@ -26,8 +26,8 @@ public class BusinessPage extends BasePage {
         DriverSingleton.wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='https://buyme.co.il/supplier/348972?budget=1&category=359&query=&region=13']"))).click();
     }
 
-    private static void enterPrice(){
-        DriverSingleton.wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='https://buyme.co.il/package/348972/7869920']"))).click();
+    private static void choosePrice(){
+        DriverSingleton.wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='https://buyme.co.il/package/348972/11617735']"))).click();
     }
 
 }
