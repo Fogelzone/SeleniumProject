@@ -2,8 +2,6 @@ package Pages;
 import Data.*;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
 import static Data.DriverSingleton.driver;
 
 public class RegisterPage extends BasePage {

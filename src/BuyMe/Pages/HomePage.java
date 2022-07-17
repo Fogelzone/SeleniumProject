@@ -1,9 +1,8 @@
 package Pages;
-
 import Data.BasePage;
-import Data.DriverSingleton;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import static Data.DriverSingleton.wait;
 
 public class HomePage extends BasePage {
 
@@ -26,16 +25,16 @@ public class HomePage extends BasePage {
 
     public static void pickRegion(){
         clickElement(By.cssSelector("span[alt='אזור']"));
-        DriverSingleton.wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li[value='13']"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li[value='13']"))).click();
     }
 
     public static void pickCategory(){
         clickElement(By.cssSelector("span[alt='קטגוריה']"));
-        DriverSingleton.wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li[value='359']"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li[value='359']"))).click();
     }
 
     public static void pressFindGiftBtn(){
-        DriverSingleton.wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='https://buyme.co.il/search?budget=1&category=359&region=13']"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='https://buyme.co.il/search?budget=1&category=359&region=13']"))).click();
     }
 
 
