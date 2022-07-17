@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class DriverSingleton {
     public static WebDriver driver;
-    static WebDriverWait wait;
+    public static WebDriverWait wait;
 
     public static WebDriver getDriverInstance(){
         if(driver == null){
@@ -18,6 +18,7 @@ public class DriverSingleton {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             driver.get("https://buyme.co.il/");
+
         }
 
         return driver;
