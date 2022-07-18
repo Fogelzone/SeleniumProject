@@ -4,12 +4,14 @@ import Data.BasePage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import static Data.DriverSingleton.driver;
 import static Data.DriverSingleton.wait;
 
 public class InfoGiftPage extends BasePage {
 
     public static void updateSenderAndReceiverInfo() {
+        assertGiftUrl();
         pressSomeoneElse();
         enterReceiverName();
         assertReceiverName();
@@ -25,8 +27,14 @@ public class InfoGiftPage extends BasePage {
         continueToPayment();
     }
 
+    private static void assertGiftUrl(){
+        String expectedUrl = driver.getCurrentUrl();
+        String actualUrl = "https://buyme.co.il/package/348972/11617735";
+        Assert.assertEquals(expectedUrl,actualUrl);
+    }
+
     private static void pressSomeoneElse(){
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div[class='grid pin-end no-gap top-xl']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[gtm='למישהו אחר'")));
         clickElement(By.cssSelector("div[gtm='למישהו אחר'"));
     }
 

@@ -23,8 +23,8 @@ public class RegisterPage extends BasePage {
 
     }
     private static void enterCredentials(){
-        sendKeysToElement(By.cssSelector("input[placeholder='שם פרטי']"), "John23");
-        sendKeysToElement(By.cssSelector("input[placeholder='מייל']"), "Auto23@project.com");
+        sendKeysToElement(By.cssSelector("input[placeholder='שם פרטי']"), "John28");
+        sendKeysToElement(By.cssSelector("input[placeholder='מייל']"), "Auto28@project.com");
         sendKeysToElement(By.cssSelector("input[placeholder='סיסמה']"), "Aa123456");
         sendKeysToElement(By.cssSelector("input[placeholder='אימות סיסמה']"), "Aa123456");
     }
@@ -35,9 +35,9 @@ public class RegisterPage extends BasePage {
 
     private static void assertFields() {
         String expectedUserName = driver.findElement(By.cssSelector("input[placeholder='שם פרטי']")).getAttribute("value");
-        String actualUserName = "John23";
+        String actualUserName = "John28";
         String expectedEmail = driver.findElement(By.cssSelector("input[placeholder='מייל']")).getAttribute("value");
-        String actualEmail = "Auto23@project.com";
+        String actualEmail = "Auto28@project.com";
         Assert.assertEquals(expectedUserName, actualUserName);
         Assert.assertEquals(expectedEmail, actualEmail);
 
