@@ -9,7 +9,7 @@ import static Data.DriverSingleton.wait;
 
 public class InfoGiftPage extends BasePage {
 
-    public static void updateSenderAndReceiverInfo(){
+    public static void updateSenderAndReceiverInfo() {
         pressSomeoneElse();
         enterReceiverName();
         assertReceiverName();
@@ -26,12 +26,13 @@ public class InfoGiftPage extends BasePage {
     }
 
     private static void pressSomeoneElse(){
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div[class='grid pin-end no-gap top-xl']")));
         clickElement(By.cssSelector("div[gtm='למישהו אחר'"));
-
     }
 
-    private static void enterReceiverName(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("friendName"))).sendKeys("דניאל");
+    private static void enterReceiverName()  {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("friendName")));
+        sendKeysToElement(By.id("friendName"), "דניאל");
     }
 
     private static void assertReceiverName(){
@@ -42,7 +43,8 @@ public class InfoGiftPage extends BasePage {
     }
     private static void pickAnEvent(){
         clickElement(By.cssSelector("span[alt='לאיזה אירוע?']"));
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li[value='11']"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li[value='11']")));
+        clickElement(By.cssSelector("li[value='11']"));
     }
     private static void enterBlessing(){
         getWebElement(By.className("parsley-success")).clear();
@@ -65,7 +67,7 @@ public class InfoGiftPage extends BasePage {
     private static void pickEmail(){
         clickElement(By.cssSelector("svg[gtm='method-email'"));
     }
-    private static void enterEmailAddress() {
+    private static void enterEmailAddress(){
         sendKeysToElement(By.id("email"), "aaa@aaa.com");
 
     }
@@ -84,7 +86,5 @@ public class InfoGiftPage extends BasePage {
     private static void continueToPayment(){
         getWebElement(By.cssSelector("button[type='submit']")).submit();
     }
-
-
 
 }
