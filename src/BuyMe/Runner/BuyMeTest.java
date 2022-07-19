@@ -10,68 +10,94 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static Data.BasePage.takeScreenShot;
 import static Data.DataToXML.getData;
-import static Data.DriverSingleton.driver;
 import static Data.DriverSingleton.getDriverInstance;
 
 
 public class BuyMeTest {
 
-
+    private static WebDriver webDriver = getDriverInstance();
     private static ExtentReports extent= new ExtentReports();
-    private static ExtentTest test = extent.createTest("BuyMeTest", "Sample description");
+    private static ExtentTest test = extent.createTest("BuyMeTest", "Buy a gift from BuyMe Website");
 
     @BeforeClass
-    public static void runBeforeTest() throws Exception {
+    public static void runBeforeTest() {
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter("C:\\Users\\Yehonathan.vogelsang\\Desktop\\extent.html");
         extent.attachReporter(htmlReporter);
         test.log(Status.INFO,"before test method");
-        getDriverInstance().get(getData("URL"));
-        test.pass("details", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, "picName")).build());
-
+        webDriver.get(getData("URL"));
+        test.info("details", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot()).build());
     }
 
     @Test
     public void test01_Register() throws Exception {
         RegisterPage registerPage = new RegisterPage();
-        RegisterPage.register();
-        test.log(Status.PASS,"Registration test");
+        String testName = "Registration";
+        test.log(Status.INFO, testName + " test");
+        try {
+            registerPage.register();
+            test.pass(testName + " pass");
+        } catch(Exception e){
+            test.info(testName + " fail", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot()).build());
+            test.fail(e.toString());
+            throw new Exception("Test failed");
+        }
     }
 
-    @Test
-    public void test02_SearchGift() throws Exception {
+    @Test(dependsOnMethods = {"test01_Register"})
+    public void test02_SearchGift() {
         HomePage homePage = new HomePage();
-        HomePage.searchGift();
-        test.log(Status.INFO, "Search for a gift test");
+        String testName = "Search for a gift";
+        test.log(Status.INFO, testName + " test");
+        try {
+            homePage.searchGift();
+            test.pass(testName + " pass");
+        } catch(Exception e){
+            test.info(testName + " fail", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot()).build());
+            test.fail(e.toString());
+        }
     }
 
-    @Test
-    public void test03_PickBusiness() throws Exception {
+    @Test(dependsOnMethods = {"test02_SearchGift"})
+    public void test03_PickBusiness() {
         BusinessPage businessPage = new BusinessPage();
-        BusinessPage.pickBusiness();
-        test.log(Status.INFO, "Pick a business test");
+        String testName = "Pick a business";
+        test.log(Status.INFO, testName + " test");
+        try {
+            businessPage.pickBusiness();
+            test.pass(testName + " pass");
+        } catch(Exception e){
+            test.info(testName + " fail", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot()).build());
+            test.fail(e.toString());
+        }
     }
 
-    @Test
+    @Test(dependsOnMethods = {"test03_PickBusiness"})
     public void test04_SenderAndReceiverInfo() throws Exception {
         InfoGiftPage infoGiftPage = new InfoGiftPage();
-        infoGiftPage.updateSenderAndReceiverInfo();
-        test.log(Status.INFO, "Sender And Receiver Info test");
-
+        String testName = "Sender And Receiver Info";
+        test.log(Status.INFO, testName + " test");
+        try {
+            infoGiftPage.updateSenderAndReceiverInfo();
+            test.pass(testName + " pass");
+        } catch(Exception e){
+            test.info(testName + " fail", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot()).build());
+            test.fail(e.toString());
+        }
     }
 
     @AfterClass
     public static void afterClass() {
-////        test.log(Status.INFO, "@After test " + "After test method");
-//        driver.quit();
+        test.log(Status.INFO, "@After test " + "After test method");
+        webDriver.quit();
         // build and flush report
         extent.flush();
-
     }
 
 }

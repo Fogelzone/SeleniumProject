@@ -3,6 +3,7 @@ package Pages;
 import Data.BasePage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static Data.DriverSingleton.driver;
@@ -26,6 +27,7 @@ public class InfoGiftPage extends BasePage {
         enterSenderName();
         assertSenderName();
         continueToPayment();
+        visibleSubmitBtn();
     }
 
     private static void assertGiftUrl(){
@@ -78,7 +80,6 @@ public class InfoGiftPage extends BasePage {
     }
     private static void enterEmailAddress() throws Exception {
         sendKeysToElement(By.id("email"), "aaa@aaa.com");
-
     }
 
     private static void enterSenderName() throws Exception {
@@ -93,7 +94,21 @@ public class InfoGiftPage extends BasePage {
     }
 
     private static void continueToPayment() throws Exception {
-        getWebElement(By.cssSelector("button[type='submit']")).submit();
+        WebElement result = getWebElement(By.cssSelector("button[type='submit']"));
+        if (result != null){
+            result.submit();
+        } else {
+            throw new Exception("Failed to locate submit button");
+        }
+    }
+
+    private static void visibleSubmitBtn() throws Exception {
+        Boolean result = wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("button[type='submit']")));
+        if (result != null) {
+            return;
+        } else {
+            throw new Exception("Submit button is still visible");
+        }
     }
 
 }

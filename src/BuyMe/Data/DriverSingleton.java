@@ -14,25 +14,27 @@ public class DriverSingleton {
     public static WebDriverWait wait;
 
 
-    public static WebDriver getDriverInstance() throws Exception {
+    public static WebDriver getDriverInstance() {
         if (driver == null) {
-            String type = getData("browserType");
-
-            System.setProperty("webdriver.chrome.driver", Constants.CHROMEDRIVER_PATH);
-            driver = new ChromeDriver();
+            String type = null;
+            try {
+                type = getData("browserType");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             if (type.equals("Chrome")) {
                 System.setProperty("webdriver.chrome.driver", Constants.CHROMEDRIVER_PATH);
                 driver = new ChromeDriver();
             } else if (type.equals("FF")) {
                 System.setProperty("webdriver.firefox.driver", "C:\\geckodriver\\geckodriver.exe");
-                driver = new FirefoxDriver();}
-
-                driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-                driver.manage().window().maximize();
-                wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                driver = new FirefoxDriver();
             }
-            return driver;
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driver.manage().window().maximize();
+            wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        }
+        return driver;
         }
 
     }

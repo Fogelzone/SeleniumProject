@@ -38,6 +38,4 @@ public class HomePage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='https://buyme.co.il/search?budget=1&category=359&region=13']")));
         clickElement(By.cssSelector("a[href='https://buyme.co.il/search?budget=1&category=359&region=13']"));
     }
-
-
 }
