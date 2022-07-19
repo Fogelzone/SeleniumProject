@@ -10,7 +10,8 @@ import static Data.DriverSingleton.wait;
 
 public class InfoGiftPage extends BasePage {
 
-    public static void updateSenderAndReceiverInfo() {
+    public static void updateSenderAndReceiverInfo() throws Exception {
+
         assertGiftUrl();
         pressSomeoneElse();
         enterReceiverName();
@@ -33,12 +34,12 @@ public class InfoGiftPage extends BasePage {
         Assert.assertEquals(expectedUrl,actualUrl);
     }
 
-    private static void pressSomeoneElse(){
+    private static void pressSomeoneElse() throws Exception {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[gtm='למישהו אחר'")));
         clickElement(By.cssSelector("div[gtm='למישהו אחר'"));
     }
 
-    private static void enterReceiverName()  {
+    private static void enterReceiverName() throws Exception {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("friendName")));
         sendKeysToElement(By.id("friendName"), "דניאל");
     }
@@ -49,12 +50,12 @@ public class InfoGiftPage extends BasePage {
         Assert.assertEquals(expectedReceiverName,actualReceiverName);
 
     }
-    private static void pickAnEvent(){
+    private static void pickAnEvent() throws Exception {
         clickElement(By.cssSelector("span[alt='לאיזה אירוע?']"));
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li[value='11']")));
         clickElement(By.cssSelector("li[value='11']"));
     }
-    private static void enterBlessing(){
+    private static void enterBlessing() throws Exception {
         getWebElement(By.className("parsley-success")).clear();
         sendKeysToElement(By.className("parsley-success"), "God bless you and good night");
     }
@@ -64,23 +65,23 @@ public class InfoGiftPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span[class='remove-media']")));
     }
 
-    private static void clickContinue(){
+    private static void clickContinue() throws Exception {
         getWebElement(By.cssSelector("button[type='submit']")).submit();
     }
 
-    private static void pressNowBtn(){
+    private static void pressNowBtn() throws Exception {
         clickElement(By.cssSelector("div[gtm='עכשיו'"));
     }
 
-    private static void pickEmail(){
+    private static void pickEmail() throws Exception {
         clickElement(By.cssSelector("svg[gtm='method-email'"));
     }
-    private static void enterEmailAddress(){
+    private static void enterEmailAddress() throws Exception {
         sendKeysToElement(By.id("email"), "aaa@aaa.com");
 
     }
 
-    private static void enterSenderName(){
+    private static void enterSenderName() throws Exception {
         getWebElement(By.cssSelector("input[placeholder='שם שולח המתנה']")).clear();
         sendKeysToElement(By.cssSelector("input[placeholder='שם שולח המתנה']"), "אין מתנות חינם");
     }
@@ -91,7 +92,7 @@ public class InfoGiftPage extends BasePage {
         Assert.assertEquals(expectedSenderName,actualSenderName);
     }
 
-    private static void continueToPayment(){
+    private static void continueToPayment() throws Exception {
         getWebElement(By.cssSelector("button[type='submit']")).submit();
     }
 

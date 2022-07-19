@@ -10,7 +10,7 @@ import static Data.DriverSingleton.driver;
 
 public class BusinessPage extends BasePage {
 
-    public static void pickBusiness()  {
+    public static void pickBusiness() throws Exception {
         assertUrl();
         selectBusiness();
         choosePrice();
@@ -22,13 +22,13 @@ public class BusinessPage extends BasePage {
         Assert.assertEquals(expectedUrl,actualUrl);
     }
 
-    private static void selectBusiness() {
+    private static void selectBusiness() throws Exception {
         DriverSingleton.wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='https://buyme.co.il/supplier/348972?budget=1&category=359&query=&region=13']")));
         clickElement(By.cssSelector("a[href='https://buyme.co.il/supplier/348972?budget=1&category=359&query=&region=13']"));
 
     }
 
-    private static void choosePrice() {
+    private static void choosePrice() throws Exception {
         DriverSingleton.wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='https://buyme.co.il/package/348972/11617735']")));
         clickElement(By.cssSelector("a[href='https://buyme.co.il/package/348972/11617735']"));
     }
