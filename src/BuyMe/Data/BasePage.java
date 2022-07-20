@@ -18,11 +18,11 @@ public class BasePage {
     private static ExtentTest test;
 
 
-    public static void clickElement(By locator) throws Exception {
+    public static void clickElement(By locator) {
         getWebElement(locator).click();
     }
 
-    public static void sendKeysToElement(By locator, String text) throws Exception {
+    public static void sendKeysToElement(By locator, String text) {
         getWebElement(locator).sendKeys(text);
     }
 

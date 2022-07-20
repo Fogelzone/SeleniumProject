@@ -37,10 +37,10 @@ public class RegisterPage extends BasePage {
     }
 
     private static void assertFields() {
-        String expectedUserName = driver.findElement(By.cssSelector("input[placeholder='שם פרטי']")).getAttribute("value");
-        String actualUserName = "John" + Constants.USER_NUMBER;
-        String expectedEmail = driver.findElement(By.cssSelector("input[placeholder='מייל']")).getAttribute("value");
-        String actualEmail = "Auto" + Constants.USER_NUMBER + "@project.com";
+        String actualUserName = driver.findElement(By.cssSelector("input[placeholder='שם פרטי']")).getAttribute("value");
+        String expectedUserName = "John" + Constants.USER_NUMBER;
+        String actualEmail = driver.findElement(By.cssSelector("input[placeholder='מייל']")).getAttribute("value");
+        String expectedEmail = "Auto" + Constants.USER_NUMBER + "@project.com";
         Assert.assertEquals(expectedUserName, actualUserName);
         Assert.assertEquals(expectedEmail, actualEmail);
     }

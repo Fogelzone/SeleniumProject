@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static Data.DriverSingleton.driver;
+import static Data.DriverSingleton.wait;
 
 public class BusinessPage extends BasePage {
 
@@ -17,8 +18,9 @@ public class BusinessPage extends BasePage {
     }
 
     public static void assertUrl(){
-        String expectedUrl = driver.getCurrentUrl();
-        String actualUrl = "https://buyme.co.il/search?budget=1&category=359&region=13";
+        String actualUrl = driver.getCurrentUrl();
+        String expectedUrl = "https://buyme.co.il/search?budget=1&category=359&region=13";
+        wait.until(ExpectedConditions.urlToBe(expectedUrl));
         Assert.assertEquals(expectedUrl,actualUrl);
     }
 
