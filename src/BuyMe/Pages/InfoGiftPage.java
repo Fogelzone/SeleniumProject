@@ -33,7 +33,7 @@ public class InfoGiftPage extends BasePage {
         Assert.assertEquals(expectedUrl,actualUrl);
     }
 
-    private static void pressSomeoneElse() throws Exception {
+    private static void pressSomeoneElse() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[gtm='למישהו אחר'")));
         clickElement(By.cssSelector("div[gtm='למישהו אחר'"));
     }

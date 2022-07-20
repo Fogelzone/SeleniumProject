@@ -37,6 +37,9 @@ public class BuyMeTest {
 
     @Test
     public void test01_Register() throws Exception {
+        /*
+        Registers a new user according to given details, in Data.Constants
+         */
         RegisterPage registerPage = new RegisterPage();
         String testName = "Registration";
         test.log(Status.INFO, testName + " test");
@@ -52,6 +55,9 @@ public class BuyMeTest {
 
     @Test(dependsOnMethods = {"test01_Register"})
     public void test02_SearchGift() {
+        /*
+        Searches for a known gift
+         */
         HomePage homePage = new HomePage();
         String testName = "Search for a gift";
         test.log(Status.INFO, testName + " test");
@@ -66,6 +72,9 @@ public class BuyMeTest {
 
     @Test(dependsOnMethods = {"test02_SearchGift"})
     public void test03_PickBusiness() {
+        /*
+        Selects a known business
+         */
         BusinessPage businessPage = new BusinessPage();
         String testName = "Pick a business";
         test.log(Status.INFO, testName + " test");
@@ -79,7 +88,11 @@ public class BuyMeTest {
     }
 
     @Test(dependsOnMethods = {"test03_PickBusiness"})
-    public void test04_SenderAndReceiverInfo() throws Exception {
+    public void test04_SenderAndReceiverInfo() {
+        /*
+        Fills in all details in the final page,
+        stops before payment
+         */
         InfoGiftPage infoGiftPage = new InfoGiftPage();
         String testName = "Sender And Receiver Info";
         test.log(Status.INFO, testName + " test");
